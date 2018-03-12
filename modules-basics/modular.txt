@@ -1,0 +1,98 @@
+Modularization :
+
+   Yet another named java platform component  , collection of code and data. Name is reverse dns name same as package name  , not neccessarily package name 
+   and module name must be same
+  
+
+module-info.java at the root level directory --> module descriptor
+  
+
+Why Modularization :
+
+1. Increased encapsulation both at compile time and runtime.
+
+providing encapsulation at compile time using exports , and at runtime using open on module or at opens inside a module at package level
+
+
+2. Dependency check at runtime , creates dependency graph at initialization time
+    (dependency check  not only at compile time but runtime too)
+	
+	Eg: remove a dependent jar once compiled , java runtime will check the module-info
+	 to build the dependency graph
+3. Targetting smaller devices.
+
+	 
+How classloader behaves now ?
+-------------------------------------
+	 
+Java platform packages itself modularized:
+--------------------------------------------
+
+java --list-modules 
+
+describe module
+---------------------------------  
+
+java -d java.base
+
+Base module in java.base each module depends /requires module 
+	 
+Constraints :
+--------------
+
+1. Module names must be unique.
+2. No duplication of module name allowed in same module path.
+3. If two different module path has the same module name , takes the first one and ignores the second.
+4. No duplication of packages allowed across modules.
+
+
+
+Public is no more public
+
+a. Export + public
+b. Qualified Export
+c. Reflection using open on Module and opens on package
+d. implied readability or transitive dependency
+
+compile time
+------------------
+export package  
+requires module
+
+Qualified 
+-------------------
+
+export <package> to <pakage> --> export this package to a partcular package to 
+   increase improved encapsulation. Useful when not ready to export any implementation classes.
+
+Transitive 
+-----------------
+
+requires transitive --> export all the packages it requires to module requires it
+
+
+
+Runtime 
+--------------------------
+open module 
+module opens pakage
+
+
+
+Service loader API
+----------------------------------
+
+1. Looks for no-arg constructor or look for a method provider() to create instance.
+2. "uses" says what interface using --> needs to be done at consumer module end.
+3. "provides" <interface> "with" <class> says that it provides an implementation of particular interface 
+
+
+
+
+Jlink
+-------------------------------------
+
+
+
+automatic modules
+--------------------------------------

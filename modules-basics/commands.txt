@@ -1,0 +1,31 @@
+java --list-modules 
+
+describe a module 
+-----------------------------
+java -d java.base
+
+describe own module
+---------------------------------
+
+java -p output\lib -d mod.one
+
+java -p output\lib --list-modules
+
+-----------------------------------------
+Dependency using jdeps
+-----------------------------------------
+dependency graph
+-----------------------
+jdeps --module-path output\lib -m mod.one 
+
+list only dependency
+-----------------------------------
+jdeps --module-path output\lib -m mod.one  --list-deps
+
+Run main class inside a module
+-------------------------------------------
+
+java -p output\lib -m mod.one
+
+
+

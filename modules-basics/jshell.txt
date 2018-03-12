@@ -1,0 +1,20 @@
+ctrl+d ,/exit 
+/
+ctrl+e --> Start of the statement
+ctrl+e --> end of the statement
+uparrow and downarrow --> move back and forth
+
+. + Tab --> code compeletion
+. + Double Tab --> Java doc
+
+/imports --> list imports on current jshell session
+/! --> execute previous
+/id --> executes  statement based on execution id
+/list --> list all exeuted statements
+/save --> enables save of statements in file
+/v --> list all variables used
+/m --> list methods
+/t--> list all classes
+/edit --> open jshelleditpad kind of editor
+/drop --> drop variable/type/method
+/history --> displays all interactions
