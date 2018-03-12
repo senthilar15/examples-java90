@@ -1,0 +1,2 @@
+C:\java-projects\java9\modular\modules-rules\module-main\module-info.java
+C:\java-projects\java9\modular\modules-rules\module-main\com\example\mod\main\MainClazz.java
