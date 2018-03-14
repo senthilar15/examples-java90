@@ -1,0 +1,2 @@
+D:\java-samples\java9\modular\examples-java90\module-sl\module-consumer\module-info.java
+D:\java-samples\java9\modular\examples-java90\module-sl\module-consumer\com\example\mod\consumer\Consumer.java

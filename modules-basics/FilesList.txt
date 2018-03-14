@@ -1,2 +1,2 @@
-C:\java-projects\java9\modular\module-one\module-info.java
-C:\java-projects\java9\modular\module-one\com\example\mod\one\MOne.java
+D:\java-samples\java9\modular\examples-java90\modules-basics\module-one\module-info.java
+D:\java-samples\java9\modular\examples-java90\modules-basics\module-one\com\example\mod\one\MOne.java
