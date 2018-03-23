@@ -9,21 +9,39 @@ module-info.java at the root level directory --> module descriptor
 
 Why Modularization :
 
-1. Increased encapsulation both at compile time and runtime.
+
+JSR 376: The Java Platform Module System.
+
+
+1. Strong encapsulation, to allow a component to declare which of its public types are accessible to other components, and which are not.
 
 providing encapsulation at compile time using exports , and at runtime using open on module or at opens inside a module at package level
 
 
-2. Dependency check at runtime , creates dependency graph at initialization time
+2. Reliable configuration, to replace the brittle, error-prone class-path mechanism with a means for program components to declare explicit dependences upon one another 
+
+
+
+Dependency check at runtime , creates dependency graph at initialization time
     (dependency check  not only at compile time but runtime too)
 	
 	Eg: remove a dependent jar once compiled , java runtime will check the module-info
 	 to build the dependency graph
+
+
 3. Targetting smaller devices.
 
 	 
 How classloader behaves now ?
--------------------------------------
+------------------------------
+
+
+Module resolution --> process of resolving dependencies by reading "requires" from module-info.java and build a module graph.
+
+requires static --> optional dependency should be available at compile time not needed at runtime, it will not be 
+added into module graph as it won't be resolved , to resolve it either another module requires directly or --add-modules has to be done  to make it available in module graph.
+
+NoClassDefFoundError --> throws if requires static depencies not resolved by the above mentioned ways when our code access the portion
 	 
 Java platform packages itself modularized:
 --------------------------------------------
@@ -50,14 +68,26 @@ Constraints :
 Public is no more public
 
 a. Export + public
-b. Qualified Export
+b. Qualified Export to package
 c. Reflection using open on Module and opens on package
 d. implied readability or transitive dependency
+e. Qualified open to package
+
+
+
 
 compile time
 ------------------
 export package  
 requires module
+requires static module
+
+runtime 
+--------------
+
+requires module 
+requires transitive
+
 
 Qualified 
 -------------------
@@ -72,11 +102,11 @@ requires transitive --> export all the packages it requires to module requires i
 
 
 
-Runtime 
+Runtime by reflection
 --------------------------
+
 open module 
 module opens pakage
-
 
 
 Service loader API
@@ -96,3 +126,39 @@ Jlink
 
 automatic modules
 --------------------------------------
+
+
+
+Class path vs module path
+
+CP                                                             MP
+
+Locates individual types in each artifacts.     Locates the whole module as a single artifact.
+
+
+Two different versions of artifact may 
+available                                      Avoids duplicate based on module name
+
+
+Same type with same package may be available 
+in two different jars                          Avoids dupliacate packages from multiple modules
+
+Slower as it should scan the classpath         faster as it builds a module graph 
+                                               requires , it can directly find module in requires based on
+                                               name in module graph
+
+
+
+
+unnamed modules 
+
+----------------------------
+
+When module system cannot find class from module path , it falls back on classpath to load the type. This type will become a part of 
+unnamed module , unnamed module can read all the exported  packages from named modules and it exports all its packages.
+
+If same package is available in both named and unnamed module , then the class on the unnamed module will be ignored , if we load a 
+class available only in the unnamed module then the class will never be loaded as the package contains this class will be ignored by 
+module system.
+
+

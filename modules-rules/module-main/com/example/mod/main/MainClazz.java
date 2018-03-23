@@ -10,6 +10,6 @@ public class MainClazz{
       System.out.println("Main called");
 
 
-}
+  }
 
 }

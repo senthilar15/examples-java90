@@ -29,3 +29,6 @@ java -p output\lib -m mod.one
 
 
 
+
+jlink --module-path="%JAVA_HOME%"\jmods;output\lib --add-modules  mod.one --add-modules mod.two --o
+utput linkdemo  --launcher=linkdemo=mod.one/com.example.mod.one.MOne
